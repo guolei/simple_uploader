@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
 
-  match "/verify_user", :to => "eco_apps_user_services#verify"
+  match "/file/:id", :to => "simple_uploader/attachments#show"
 
 end

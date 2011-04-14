@@ -10,12 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110413065811) do
+ActiveRecord::Schema.define(:version => 20110414064055) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "simple_uploader_attachments", :force => true do |t|
+    t.string   "content_type"
+    t.integer  "content_id"
+    t.string   "uuid"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simple_uploader_attachments", ["content_type", "content_id"], :name => "index_simple_uploader_attachments_on_content_type_and_content_id"
+  add_index "simple_uploader_attachments", ["uuid"], :name => "index_simple_uploader_attachments_on_uuid"
 
 end

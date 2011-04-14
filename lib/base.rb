@@ -1,26 +1,26 @@
 module SimpleUploader
 
-    ## Define ModelMethods
-    module Base
-      def self.included(klass)
-        klass.class_eval do
-          extend Config
-        end
-      end
-      
-      module Config
-        def has_attachments(options = {})
-
-          include SimpleUploader::Base::InstanceMethods
-        end
-      end
-      
-      module InstanceMethods
-        
-        
-                
-      end # InstanceMethods      
+  module Base
+    def self.included(klass)
+      klass.extend ClassMethods
     end
+      
+    module ClassMethods
+      def has_attachments(options = {})
+        has_many :attachments, :class_name => "SimpleUploader::Attachment", :as => :content
+        include SimpleUploader::Base::InstanceMethods
+      end
+
+      def has_attachment(options = {})
+        has_one :attachment, :class_name => "SimpleUploader::Attachment", :as => :content
+        include SimpleUploader::Base::InstanceMethods
+      end
+    end
+      
+    module InstanceMethods
+         
+    end
+  end
 
 end
 

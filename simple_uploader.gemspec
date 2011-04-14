@@ -6,7 +6,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = "https://github.com/guolei/"
   s.platform = Gem::Platform::RUBY
   s.summary = "Simple Uploader"
-  %w{lib app config}.each{|folder|
+  %w{lib app config public}.each{|folder|
     s.files += Dir["#{folder}/**/*"]
   }
   s.require_path = "lib"
