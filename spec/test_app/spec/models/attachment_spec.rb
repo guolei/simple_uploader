@@ -17,6 +17,7 @@ describe SimpleUploader::Attachment do
     @attachment.content_type.should == "application/vnd.openxml"
     @attachment.size.should == 14205
     @attachment.url.should_not be_blank
+    @attachment.path.should_not be_blank
   end
 
   it "should check if image" do

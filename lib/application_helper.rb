@@ -2,8 +2,8 @@ module ApplicationHelper
   
   def attachment_form_for(obj, options = {})
     javascript_include_tag('jquery.fileupload', 'jquery.fileupload-ui') +
+      javascript_tag(:charset => "utf-8"){
       %{
-        <script type="text/javascript" charset="utf-8">
         $(function () {
           $('.upload').fileUploadUI({
                 uploadTable: $('.upload_files'),
@@ -18,21 +18,44 @@ module ApplicationHelper
                             '<\/button><\/td><\/tr>');
                 },
                 buildDownloadRow: function (file) {
-                    return $('<tr><td><img alt="Photo" width="40" height="40" src="' + file.pic_path + '">' + file.name + '<\/td><\/tr>');
-                },
-            });
+                    return $('#{form_file_line("UUID","FILENAME")}'.replace(/UUID/g, file.uuid).replace(/FILENAME/g, file.filename));
+      },
+      });
         });
-        </script>
+      }.html_safe
     } +
       content_tag(:div, :class => "files"){
-      form_for(@upload, :html => { :class => "upload", :multipart => true }){|f|
+      form_for(SimpleUploader::Attachment.new, :as => :attachment, :url => uploads_path, :html => { :class => "upload", :multipart => true }){|f|
         f.file_field(:attachment) +
+          f.hidden_field(:content_type, :value => obj.class.to_s) +
+          f.hidden_field(:content_id, :value => obj.id) +
           content_tag(:div){I18n.t(:upload_files, :raise => true) rescue "Upload Files"}
+      }.html_safe +
+        content_tag(:table, "", :class=>"download_files"){
+        obj.attachments.map{|t| form_file_line(t.uuid, t.original_filename)}.join.html_safe
       } +
-        content_tag(:table, :class => "upload_files") +
-        content_tag(:table, :class=>"download_files")
+        content_tag(:table, "", :class => "upload_files")
     }
 
+  end
+
+  def attachments_for(obj, options = {})
+    content_tag :div, :class => "attachment-list" do
+      content_tag :ul do
+        obj.attachments.map{|attach|
+          content_tag(:li){attach.original_filename.html_safe + link_to("download", "/file/#{attach.uuid}")}
+        }.join.html_safe
+      end
+    end
+  end
+
+  private
+  def form_file_line(uuid, filename)
+    content_tag :tr, :id=>"#{uuid}" do
+      content_tag :td do
+        (filename + link_to("del", upload_path(:id=>uuid), :method => :delete, :remote => true)).html_safe
+      end
+    end
   end
   
 end

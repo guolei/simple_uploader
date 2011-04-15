@@ -5,7 +5,7 @@ module SimpleUploader
     belongs_to :content, :polymorphic => true
     has_attached_file :attachment
 
-    delegate :url, :original_filename, :content_type, :size, :to => :attachment, :allow_nil => true
+    delegate :url,:path, :original_filename, :content_type, :size, :to => :attachment, :allow_nil => true
 
     before_create :init_uuid
     def init_uuid
