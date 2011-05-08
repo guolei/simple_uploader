@@ -23,6 +23,9 @@ module SimpleUploader
 
       def copy_initializer_file
         copy_file 'initializer.rb', 'config/initializers/simple_uploader.rb'
+        copy_file 'jquery.fileupload-ui.css', 'public/stylesheets/jquery.fileupload-ui.css'
+        copy_file 'jquery.fileupload-ui.js', 'public/javascripts/jquery.fileupload-ui.js'
+        copy_file 'jquery.fileupload.js', 'public/javascripts/jquery.fileupload.js'
       end
  
     end

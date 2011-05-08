@@ -1,8 +1,12 @@
 module ApplicationHelper
   
   def attachment_form_for(obj, options = {})
-    javascript_include_tag('jquery.fileupload', 'jquery.fileupload-ui') +
-      javascript_tag(:charset => "utf-8"){
+    c = ""
+    unless @js_loaded
+      c = javascript_include_tag('jquery.fileupload', 'jquery.fileupload-ui') + stylesheet_link_tag('jquery.fileupload-ui')
+      @js_loaded = true
+    end
+    c.html_safe + javascript_tag(:charset => "utf-8"){
       %{
         $(function () {
           $('.upload').fileUploadUI({
