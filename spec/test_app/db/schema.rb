@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110414064055) do
+ActiveRecord::Schema.define(:version => 20110508131630) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20110414064055) do
     t.datetime "updated_at"
   end
 
-  add_index "simple_uploader_attachments", ["content_type", "content_id"], :name => "index_simple_uploader_attachments_on_content_type_and_content_id"
-  add_index "simple_uploader_attachments", ["uuid"], :name => "index_simple_uploader_attachments_on_uuid"
+  add_index "simple_uploader_attachments", ["content_type", "content_id"], :name => "index_on_content"
+  add_index "simple_uploader_attachments", ["uuid"], :name => "index_on_name"
 
 end

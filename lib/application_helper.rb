@@ -25,7 +25,7 @@ module ApplicationHelper
       }.html_safe
     } +
       content_tag(:div, :class => "files"){
-      form_for(SimpleUploader::Attachment.new, :as => :attachment, :url => uploads_path, :html => { :class => "upload", :multipart => true }){|f|
+      form_for(SimpleUploader::Attachment.new, :as => :attachment, :url => simple_uploader_attachments_path, :html => { :class => "upload", :multipart => true }){|f|
         f.file_field(:attachment) +
           f.hidden_field(:content_type, :value => obj.class.to_s) +
           f.hidden_field(:content_id, :value => obj.id) +
@@ -53,7 +53,7 @@ module ApplicationHelper
   def form_file_line(uuid, filename)
     content_tag :tr, :id=>"#{uuid}" do
       content_tag :td do
-        (filename + link_to("del", upload_path(:id=>uuid), :method => :delete, :remote => true)).html_safe
+        (filename + link_to("del", simple_uploader_attachment_path(:id=>uuid), :method => :delete, :remote => true)).html_safe
       end
     end
   end
