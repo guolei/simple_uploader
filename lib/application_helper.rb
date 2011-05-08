@@ -6,12 +6,13 @@ module ApplicationHelper
       c = javascript_include_tag('jquery.fileupload', 'jquery.fileupload-ui') + stylesheet_link_tag('jquery.fileupload-ui')
       @js_loaded = true
     end
+    form_id = "form_#{rand(Time.now.to_i)}"
     c.html_safe + javascript_tag(:charset => "utf-8"){
       %{
         $(function () {
-          $('.upload').fileUploadUI({
-                uploadTable: $('.upload_files'),
-                downloadTable: $('.download_files'),
+          $('##{form_id}').fileUploadUI({
+                uploadTable: $('##{form_id}_upload_files'),
+                downloadTable: $('##{form_id}_download_files'),
                 buildUploadRow: function (files, index) {
                     var file = files[index];
                     return $('<tr><td>' + file.name + '<\/td>' +
@@ -29,16 +30,16 @@ module ApplicationHelper
       }.html_safe
     } +
       content_tag(:div, :class => "files"){
-      form_for(SimpleUploader::Attachment.new, :as => :attachment, :url => simple_uploader_attachments_path, :html => { :class => "upload", :multipart => true }){|f|
+      form_for(SimpleUploader::Attachment.new, :as => :attachment, :url => simple_uploader_attachments_path, :html => {:id => form_id, :class => "upload", :multipart => true }){|f|
         f.file_field(:attachment) +
           f.hidden_field(:content_type, :value => obj.class.to_s) +
           f.hidden_field(:content_id, :value => obj.id) +
           content_tag(:div){I18n.t(:upload_files, :raise => true) rescue "Upload Files"}
       }.html_safe +
-        content_tag(:table, "", :class=>"download_files"){
+        content_tag(:table, "", :id=>"#{form_id}_download_files"){
         obj.attachments.map{|t| form_file_line(t.uuid, t.original_filename)}.join.html_safe
       } +
-        content_tag(:table, "", :class => "upload_files")
+        content_tag(:table, "", :id => "#{form_id}_upload_files")
     }
 
   end
