@@ -10,8 +10,8 @@ class CreateAttachmentTables < ActiveRecord::Migration
       t.datetime  :updated_at
     end
 
-    add_index :simple_uploader_attachments, [:content_type, :content_id]
-    add_index :simple_uploader_attachments, :uuid, :uniq => true
+    add_index :simple_uploader_attachments, [:content_type, :content_id], :name => "index_on_content"
+    add_index :simple_uploader_attachments, :uuid, :uniq => true, :name => "index_on_name"
   end
 
   def self.down
