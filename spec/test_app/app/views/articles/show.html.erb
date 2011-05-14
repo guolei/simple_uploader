@@ -1,0 +1,8 @@
+<%= attachment_form_for @article %>
+
+<%= attachments_for @article %>
+
+
+<%= attachments_for(@article){|attach|
+  link_to(attach.original_name)
+} %>

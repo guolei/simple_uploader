@@ -2,13 +2,13 @@ class SimpleUploader::AttachmentsController < ApplicationController
   def show
     file = SimpleUploader::Attachment.find_by_uuid(params[:id])
     disposition = file.image? ? "inline" : "attachment"
-    send_file(file.path, :filename => file.original_filename, :type => file.content_type, :disposition => disposition)
+    send_file(file.path, :filename => file.name, :type => file.content_type, :disposition => disposition)
   end
 
   def create
     @attachment = SimpleUploader::Attachment.new(params[:attachment])
     if @attachment.save
-      render :json => { :uuid => @attachment.uuid.to_s, :filename => @attachment.original_filename }, :content_type => 'text/html'
+      render :json => { :uuid => @attachment.uuid.to_s, :filename => @attachment.name }, :content_type => 'text/html'
     else
       render :json => { :result => 'error'}, :content_type => 'text/html'
     end

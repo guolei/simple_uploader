@@ -11,19 +11,19 @@ module ApplicationHelper
       %{
         $(function () {
           $('##{form_id}').fileUploadUI({
-                uploadTable: $('##{form_id}_upload_files'),
-                downloadTable: $('##{form_id}_download_files'),
-                buildUploadRow: function (files, index) {
-                    var file = files[index];
-                    return $('<tr><td>' + file.name + '<\/td>' +
-                            '<td class="file_upload_progress"><div><\/div><\/td>' +
-                            '<td class="file_upload_cancel">' +
-                            '<button class="ui-state-default ui-corner-all" title="Cancel">' +
-                            '<span class="ui-icon ui-icon-cancel">Cancel<\/span>' +
-                            '<\/button><\/td><\/tr>');
-                },
-                buildDownloadRow: function (file) {
-                    return $('#{form_file_line("UUID","FILENAME")}'.replace(/UUID/g, file.uuid).replace(/FILENAME/g, file.filename));
+      uploadTable: $('##{form_id}_upload_files'),
+      downloadTable: $('##{form_id}_download_files'),
+      buildUploadRow: function (files, index) {
+      var file = files[index];
+      return $('<tr><td>' + file.name + '<\/td>' +
+      '<td class="file_upload_progress"><div><\/div><\/td>' +
+      '<td class="file_upload_cancel">' +
+      '<button class="ui-state-default ui-corner-all" title="Cancel">' +
+      '<span class="ui-icon ui-icon-cancel">Cancel<\/span>' +
+      '<\/button><\/td><\/tr>');
+      },
+      buildDownloadRow: function (file) {
+      return $('#{form_file_line("UUID","FILENAME")}'.replace(/UUID/g, file.uuid).replace(/FILENAME/g, file.filename));
       },
       });
         });
@@ -44,11 +44,11 @@ module ApplicationHelper
 
   end
 
-  def attachments_for(obj, options = {})
+  def attachments_for(obj, options = {}, &block)
     content_tag :div, :class => "attachment-list" do
       content_tag :ul do
         obj.attachments.map{|attach|
-          content_tag(:li){attach.original_filename.html_safe + link_to("download", "/file/#{attach.uuid}")}
+          content_tag(:li){block_given? ? block.call(attach) : attach.original_filename.html_safe + link_to("download", attach.url)}
         }.join.html_safe
       end
     end

@@ -5,10 +5,11 @@ describe ArticlesController do
   
   before do
     @article = Factory(:article)
+    @attachment = Factory(:attachment, :content => @article) 
   end
-
+ 
   it "should respond to index" do
-    get :index
+    get :show, :id => @article.id
     response.should be_success
   end
 end
