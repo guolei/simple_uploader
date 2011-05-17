@@ -2,7 +2,7 @@ class SimpleUploader::AttachmentsController < ApplicationController
   def show
     file = SimpleUploader::Attachment.find_by_uuid(params[:id])
     disposition = file.image? ? "inline" : "attachment"
-    send_file(file.url, :filename => file.name, :type => file.content_type, :disposition => disposition)
+    send_file(file.attachment.url, :filename => file.name, :type => file.content_type, :disposition => disposition)
   end
 
   def create
