@@ -58,7 +58,7 @@ module ApplicationHelper
   def form_file_line(uuid, filename)
     content_tag :tr, :id=>"#{uuid}" do
       content_tag :td do
-        (filename + link_to("del", simple_uploader_attachment_path(:id=>uuid), :method => :delete, :remote => true)).html_safe
+        (filename + link_to((I18n.t(:del, :raise => true) rescue "Del"), simple_uploader_attachment_path(:id=>uuid), :method => :delete, :remote => true)).html_safe
       end
     end
   end
