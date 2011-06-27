@@ -1,4 +1,5 @@
 require 'rails'
+require 'builder'
 require 'action_controller'
 require 'application_helper'
 

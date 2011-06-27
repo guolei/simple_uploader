@@ -13,5 +13,6 @@ spec = Gem::Specification.new do |s|
   s.autorequire = "simple_uploader"
   s.test_files = Dir["{spec}/**/*"]
   s.add_dependency("paperclip", "~> 2.3")
+  s.add_dependency("builder", ">= 2.0")
 end
 
