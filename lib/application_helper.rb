@@ -7,7 +7,7 @@ module ApplicationHelper
       @js_loaded = true
     end
     form_id = "form_#{rand(Time.now.to_i)}"
-    c.html_safe + javascript_tag(:charset => "utf-8"){
+    c.html_safe + javascript_tag{
       %{
         $(function () {
           $('##{form_id}').fileUploadUI({
