@@ -8,7 +8,7 @@ class SimpleUploader::AttachmentsController < ApplicationController
   def create
     @attachment = SimpleUploader::Attachment.new(params[:attachment])
     if @attachment.save
-      render :json => { :uuid => @attachment.uuid.to_s, :filename => @attachment.name }, :content_type => 'text/html'
+      render :json => { :uuid => @attachment.uuid.to_s, :filename => @attachment.name.to_xs }, :content_type => 'text/html'
     else
       render :json => { :result => 'error'}, :content_type => 'text/html'
     end
