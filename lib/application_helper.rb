@@ -37,7 +37,7 @@ module ApplicationHelper
           f.hidden_field(:content_id, :value => obj.id) +
           content_tag(:div, :class=>"upload-text-label"){I18n.t(:upload_files, :raise => true) rescue "Upload Files"}
       }.html_safe +
-        content_tag(:table, "", :id=>"#{form_id}_download_files"){
+        content_tag(:table, "", :id=>"#{form_id}_download_files", :class=>"download_files"){
         obj.attachments.map{|t| form_file_line(t.uuid, t.original_filename)}.join.html_safe
       } +
         content_tag(:table, "", :id => "#{form_id}_upload_files")
