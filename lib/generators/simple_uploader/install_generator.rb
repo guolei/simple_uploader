@@ -27,6 +27,9 @@ module SimpleUploader
 	copy_file 'pbar-ani.gif', 'public/stylesheets/pbar-ani.gif'
         copy_file 'jquery.fileupload-ui.js', 'public/javascripts/jquery.fileupload-ui.js'
         copy_file 'jquery.fileupload.js', 'public/javascripts/jquery.fileupload.js'
+        copy_file 'jquery.fileupload.js', 'public/javascripts/jquery.iframe-transport.js'
+        copy_file 'jquery.fileupload.js', 'public/javascripts/jquery.postmessage-transport.js'
+        copy_file 'jquery.fileupload.js', 'public/javascripts/jquery.xdr-transport.js'
       end
  
     end

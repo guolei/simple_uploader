@@ -3,7 +3,7 @@ module ApplicationHelper
   def attachment_form_for(obj, options = {})
     c = ""
     unless @js_loaded
-      c = javascript_include_tag('jquery.fileupload', 'jquery.fileupload-ui') + stylesheet_link_tag('jquery.fileupload-ui')
+      c = javascript_include_tag('jquery.fileupload', 'jquery.fileupload-ui', 'jquery.iframe-transport', 'jquery.postmessage-transport','jquery.xdr-transport') + stylesheet_link_tag('jquery.fileupload-ui')
       @js_loaded = true
     end
     form_id = "form_#{rand(Time.now.to_i)}"
