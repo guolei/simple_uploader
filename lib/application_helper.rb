@@ -25,7 +25,7 @@ module ApplicationHelper
       buildDownloadRow: function (file) {
         #{options[:callback]}
         return $('#{form_file_line("UUID","FILENAME")}'.replace(/UUID/g, file.uuid).replace(/FILENAME/g, file.filename));
-      },
+      }
       });
         });
       }.html_safe
