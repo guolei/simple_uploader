@@ -1,4 +1,5 @@
 class SimpleUploader::AttachmentsController < ApplicationController
+  skip_before_filter :login_required
   def show
     file = SimpleUploader::Attachment.find_by_uuid(params[:id])
     disposition = file.image? ? "inline" : "attachment"
