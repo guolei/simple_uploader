@@ -3,7 +3,8 @@ module SimpleUploader
     set_table_name :simple_uploader_attachments
     
     belongs_to :content, :polymorphic => true
-    has_attached_file :attachment
+    
+    has_attached_file :attachment, :styles => lambda { |attachment| attachment.instance.styles }
 
     delegate :path, :original_filename, :content_type, :size, :to => :attachment, :allow_nil => true
     alias_method :name, :original_filename
@@ -19,6 +20,12 @@ module SimpleUploader
 
     def image?
       self.content_type =~ /^image/
+    end
+
+    def styles
+      self.image? ? self[:content_type].constantize._attchments_options[:styles] : {}
+    rescue Exception => ex
+      {}
     end
   end
 end
