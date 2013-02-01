@@ -3,9 +3,10 @@ class CreateAttachmentTables < ActiveRecord::Migration
     create_table :simple_uploader_attachments, :force => true do |t|
       t.string    :content_type
       t.integer   :content_id
-     	t.string    :uuid, :attachment_file_name, :attachment_content_type
+      t.string    :uuid, :attachment_file_name, :attachment_content_type
       t.integer   :attachment_file_size
       t.datetime  :attachment_updated_at
+      t.string    :attachment_fingerprint
       t.datetime  :created_at
       t.datetime  :updated_at
     end

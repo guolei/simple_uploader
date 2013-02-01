@@ -9,6 +9,13 @@ module SimpleUploader
       def has_attachments(options = {})
         has_many :attachments, :class_name => "SimpleUploader::Attachment", :as => :content
         include SimpleUploader::Base::InstanceMethods
+        self.class_eval do
+          @attchments_options = options
+
+          def self._attchments_options 
+            @attchments_options
+          end
+        end
       end
 
       def has_attachment(options = {})
