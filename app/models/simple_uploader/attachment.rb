@@ -4,12 +4,16 @@ module SimpleUploader
     
     belongs_to :content, :polymorphic => true
     
-    has_attached_file :attachment, :styles => lambda { |attachment| attachment.instance.styles }
+    has_attached_file( :attachment, 
+                       :styles => lambda { |attachment| attachment.instance.styles },
+                       :path => "public/system/:six_bits_md5_sum/:id_partition/:style/:filename" )
 
     delegate :path, :original_filename, :content_type, :size, :to => :attachment, :allow_nil => true
+
     alias_method :name, :original_filename
 
     before_create :init_uuid
+
     def init_uuid
       self.uuid = ActiveSupport::SecureRandom.hex(8)
     end
