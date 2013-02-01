@@ -18,7 +18,7 @@ spec = Gem::Specification.new do |s|
   s.require_path = ['lib']
   s.test_files = Dir['{spec}/**/*']
 
-  s.add_runtime_dependency 'paperclip', '~> 2.3'
+  s.add_runtime_dependency 'paperclip',  '~> 3.0'
   s.add_runtime_dependency 'builder', '>= 2.0'
 end
 
